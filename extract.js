@@ -4,7 +4,7 @@ const readline = require("readline");
 const minimatch = require("minimatch"); // Import minimatch for pattern matching
 
 // Accepted file extensions for extraction
-const extensions = ["js", "ts"];
+const extensions = ["js", "ts", "jsx", "tsx"];
 
 // Directories and file patterns to ignore using wildcard patterns
 const ignorePatterns = [
@@ -23,6 +23,7 @@ const isValidExtension = (file) => {
 // Function to check if a file should be ignored using minimatch
 const isIgnored = (file, baseDir) => {
   const relativePath = path.relative(baseDir, file).replace(/\\/g, "/"); // Normalize to forward slashes
+  console.log("relativePath", relativePath);
   return ignorePatterns.some((pattern) => minimatch(relativePath, pattern));
 };
 
