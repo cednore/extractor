@@ -1,18 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 const readline = require("readline");
-const minimatch = require("minimatch"); // Import minimatch for pattern matching
+const { minimatch } = require("minimatch"); // Import minimatch for pattern matching
 
 // Accepted file extensions for extraction
 const extensions = ["js", "ts", "jsx", "tsx"];
 
 // Directories and file patterns to ignore using wildcard patterns
-const ignorePatterns = [
-  "components/*.*",
-  "assets/*.svg",
-  "/ignore/**",
-  "*.svg",
-]; // Follow best wildcard practices
+const ignorePatterns = ["components/*.*", "*.svg"]; // Follow best wildcard practices
 
 // Function to check if a file has an accepted extension
 const isValidExtension = (file) => {
@@ -23,7 +18,6 @@ const isValidExtension = (file) => {
 // Function to check if a file should be ignored using minimatch
 const isIgnored = (file, baseDir) => {
   const relativePath = path.relative(baseDir, file).replace(/\\/g, "/"); // Normalize to forward slashes
-  console.log("relativePath", relativePath);
   return ignorePatterns.some((pattern) => minimatch(relativePath, pattern));
 };
 
